@@ -12,25 +12,43 @@ import { Login } from '../../models/login.model';
 })
 export class LoginComponent implements OnInit {
 
-  login!: Login;
+  login: Login = new Login();
   invalidLogin!: boolean;
+  clientDetail !: FormGroup;
 
-  constructor(private registerationService: RegisterationService, private router: Router) { }
+  constructor(private registerationService: RegisterationService, private router: Router, private formBuilder: FormBuilder) { }
  
   
   ngOnInit(): void {
+    this.initialForm();
+  }
+
+  initialForm() {
+    this.clientDetail = this.formBuilder.group({
+      email: [''],
+      password: ['']
+    });
   }
 
   onSignIn() {
+    this.login.email = this.clientDetail.value.email;
+    this.login.password = this.clientDetail.value.password;
+    console.log(this.login);
     this.registerationService.Login(this.login).subscribe((res: any) => {
       console.log(res);
+      const token = res.token;
       this.invalidLogin = res === 0;
       if(!this.invalidLogin) {
+        localStorage.setItem('token', token);
         this.router.navigate(['/home']);
       }
     }, (err: any) => {
       console.log(err);
     });
+  }
+
+  onSignOut() {
+    localStorage.clear();
   }
 
 }
