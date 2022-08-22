@@ -1,0 +1,87 @@
+<div class="container mt-5">
+  <button type="button" class="btn btn-primary my-3" data-bs-toggle="modal" data-bs-target="#addDepartment">
+    Add Department
+  </button>
+  <table class="table table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let i = index; let department of departmentList">
+        <td>
+          {{ i+1 }}
+        </td>
+        <td>
+          {{ department.name }}
+        </td>
+        <td>
+          <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editDepartment"
+            (click)="editDepartment(department)">Edit</button>
+          &nbsp;
+          <button type="button" class="btn btn-danger" (click)="deleteDepartment(department)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+  <!-- Department Add Modal -->
+  <div class="modal fade" id="addDepartment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Department</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="departmentDetail">
+            <div class="mb-3">
+              <label for="departmentName" class="form-label">Department Name</label>
+              <input type="text" formControlName="name" class="form-control" id="departmentName"
+                aria-describedby="emailHelp">
+              <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" (click)="addDepartment()" data-bs-dismiss="modal">Add
+            Department</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Department Edit Modal -->
+  <div class="modal fade" id="editDepartment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Department</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="departmentDetail">
+            <div class="mb-3">
+              <label for="departmentName" class="form-label">Department Name</label>
+              <input type="text" formControlName="name" class="form-control" id="departmentName"
+                aria-describedby="emailHelp">
+              <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" (click)="updateDepartment()"
+            data-bs-dismiss="modal">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

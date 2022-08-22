@@ -1,0 +1,36 @@
+<div class="container my-5">
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-bordered">
+        <thead class="table-dark">
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Salary</th>
+            <th>Is Active</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let i = index; let employee of employeeList">
+            <td>
+              {{ i+1 }}
+            </td>
+            <td>
+              {{ employee.name }}
+            </td>
+            <td>
+              {{ employee.departmentName }}
+            </td>
+            <td>
+              {{ employee.salary }}
+            </td>
+            <td>
+              {{ employee.isActive }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
